@@ -1,4 +1,4 @@
-package main
+package s3connect
 
 import (
 	"io/ioutil"
@@ -10,9 +10,11 @@ import (
 	"fmt"
 )
 
-func main() {
+func Connect(day string) string {
 	bucket := "advent2020bednar"
-	item := fmt.Sprintf("day%vInput.txt", "1")
+	item := fmt.Sprintf("day%vInput.txt", day)
+
+	fmt.Println(item)
 
 	sess, _ := session.NewSession(&aws.Config{
 		Region: aws.String("us-west-2")},
@@ -36,7 +38,7 @@ func main() {
 		fmt.Println(err)
 	}
 
-	bodyString1 := fmt.Sprintf("%s", body1)
+	bodyString1 := string(body1)
 
-	fmt.Println(bodyString1)
+	return bodyString1
 }
